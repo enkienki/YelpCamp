@@ -1,17 +1,20 @@
 <% include layout/header %>
 
+<!-- navbar -->
+<nav class="navbar navbar-expand-sm navbar-light bg-primary">
+    <a class="navbar-brand text-white" href="/">YelpCamp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<div class="jumbotron jumbotron-fluid bg-primary">
-    <div class="container">
-        <h1 class="text-center display-4">Welcome to YelpCamp</h1>
-    </div>
-</div>
-
-<nav class="container nav nav-pills p-3 p-sm-5">
-    <div class="nav-item"></div>
-    <a class="nav-link active m-2" href="/">Home</a>
-    <a class="nav-link m-2" href="/campgrounds">Campgrounds</a>
-    <a class="nav-link m-2" href="/new">Add new camp</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="navbar-nav mr-auto ">
+                <a class="nav-item nav-link" href="/">Home</a>
+                <a class="nav-item nav-link active" href="/campgrounds">Campgrounds</a>
+                <a class="nav-item nav-link" href="/new">Add new camp</a>
+            </div>
+        </div>
 </nav>
 
 <% include layout/footer %>

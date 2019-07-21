@@ -1,18 +1,30 @@
 <% include layout/header %>
 
-<div class="jumbotron jumbotron-fluid bg-primary">
-    <div class="container">
-        <h1 class="text-center display-4">Add a new campground</h1>
-    </div>
-</div>
+<!-- navbar -->
+<nav class="navbar navbar-expand-sm navbar-light bg-primary">
+    <a class="navbar-brand text-white" href="/">YelpCamp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<nav class="container nav nav-pills p-3 p-sm-5">
-    <div class="nav-item"></div>
-    <a class="nav-link m-2" href="/">Home</a>
-    <a class="nav-link m-2" href="/campgrounds">Campgrounds</a>
-    <a class="nav-link active m-2" href="/new">Add new camp</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav mr-auto ">
+                <a class="nav-item nav-link" href="/">Home</a>
+                <a class="nav-item nav-link" href="/campgrounds">Campgrounds</a>
+                <a class="nav-item nav-link active" href="/new">Add new camp</a>
+            </div>
+        </div>
 </nav>
 
+<!-- hero -->
+<div class="jumbotron jumbotron-fluid bg-primary">
+    <div class="container">
+        <h1 class="display-4">Add your Campground to the world</h1>
+    </div>
+
+</div>
+<!-- form -->
 <div class="container">
         <form action="/addNewCamp" method="POST">
             <div class="form-group">
@@ -21,17 +33,18 @@
                     <input class="form-control" type="text" name="newCampName" placeholder="enter the camp name">
                 </div>
                 <div class="col-12 col-md-6 m-2 mt-4">
-                    <label for="newCampName">Place</label>
+                    <label for="newCampImage">Place</label>
                     <input class="form-control" type="text" name="newCampImage" placeholder="enter an image url">
+                </div>
+                <div class="col-12 col-md-6 m-2 mt-4">
+                    <label for="newCampDescription">Description</label>
+                    <textarea class="form-control" type="text" name="newCampDescription" placeholder="add a description about the campground"></textarea>
                 </div>
                 <div class="col ml-2 mt-5">
                     <button type="submit" class="btn btn-outline-light">Add a camp</button>
                 </div>
-                
             </div>
-        </form>
- 
-    
+        </form> 
 </div>
 
 

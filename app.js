@@ -23,44 +23,19 @@ app.use(express.static('public'))
 // allow to not use the extension .ejs after file names
 app.set('view engine', 'ejs')
 
-/* var campgrounds = [
-    {
-        name: "Goat Mountain",
-        image: "https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60",
-    },
-    {
-        name: "Goat River",
-        image: "https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60",
-    },
-    {
-        name: "Lion Hill",
-        image: "https://images.unsplash.com/photo-1519395612667-3b754d7b9086?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60",
-    },
-    {
-        name: "Little Valley",
-        image: "https://images.unsplash.com/photo-1492648272180-61e45a8d98a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60",
-    },
-    {
-        name: "Lion Hill",
-        image: "https://images.unsplash.com/photo-1519395612667-3b754d7b9086?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60",
-    },
-    {
-        name: "Goat Mountain",
-        image: "https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60",
-    },
-] */
 
 // Set Campground Model
 var CampgroundSchema = new mongoose.Schema({
     name: String,
     image: String,
+    description: String,
 })
 var Campground = mongoose.model('Campground', CampgroundSchema)
 
 // Route to homepage
 app.get('/', (req, res) => res.render('home'))
 
-// Route to Campgrounds page
+// INDEX - show all campgrounds
 app.get('/campgrounds', (req, res) => {
     //retrive existing campgrounds from DB
     Campground.find({}, (err, campgrounds) => {
@@ -68,21 +43,33 @@ app.get('/campgrounds', (req, res) => {
         console.log(err)
         : 
         //display campgrounds from DB
-        res.render('campgrounds', { campgrounds: campgrounds })   
+        res.render('index', { campgrounds: campgrounds })   
     })   
 })
 
+// NEW - show form to create new campground
 app.get('/new', (req, res) => res.render('new'))
 
-// add new campground to the DB coming from the form
+// CREATE - add new campground to the DB coming from the form
 app.post('/addNewCamp', (req, res) => {
     Campground.create({
         name : req.body.newCampName,
         image: req.body.newCampImage,
+        description: req.body.newCampDescription,
     },
         (err, camp) => { err ? console.log(err) : console.log(camp) })
-    res.redirect('/campgrounds')
+    res.redirect('/index')
 })
 
+// SHOW - show infos about one campground
+app.get('/campgrounds/:id', (req, res) => {
+    Campground.findById(req.params.id, (err, foundCampground) => {
+        if(err) {
+            console.log(err)
+        } else {
+            res.render('show', { campground: foundCampground })            
+        }
+    })
+})
 
 app.listen(port, () => console.log(`Express listen on ${port}`))
