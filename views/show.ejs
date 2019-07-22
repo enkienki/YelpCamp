@@ -1,9 +1,50 @@
 <% include layout/header %>
 
-<h3><%= campground.name %></h3>
+<div class="container mt-5">
+    <h3 class="display-4 font-weight-lighter text-info"><%= campground.name %></h3>
+</div>
 
-<img src=<%= campground.image %> class="img-fluid" />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-11 col-md-6">
+            <img src=<%= campground.image %> class="img-fluid rounded-lg" />
+        </div>
+    </div>
+</div>
 
-<p><%= campground.description %></p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <p><%= campground.description %></p>
+        </div>     
+    </div>
+</div>
+
+<!-- COMMENTS -->
+<div class="container comments">
+    <div class="row">
+        <div class="col-12 mt-4 mb-4 ">
+            <h5 class="font-weight-lighter text-info">Comments (<%= campground.comments.length %>)</h5>
+        </div>
+        <div class="col-lg-7 col-sm-10 col-12">    
+            <% campground.comments.map((comment) => { %>
+                <p class="ml-md-5"><%= comment.text %> - <span class="font-weight-lighter font-italic"><%= comment.author %></span></p>  
+                <hr/>
+            <% }) %>
+        </div> 
+    </div>
+</div>
+
+<!-- NAV BUTTON -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a href="/campgrounds" class="btn btn-outline-light">Back</a>
+            <a href="/campgrounds" class="btn btn-outline-info ml-2">Add comment</a>
+        </div>
+    </div>
+</div>
+
+
 
 <% include layout/footer %>

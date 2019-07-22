@@ -1,7 +1,7 @@
 <% include layout/header %>
 
 <!-- navbar -->
-<nav class="navbar navbar-expand-sm navbar-light bg-primary">
+<nav class="navbar navbar-expand-sm navbar-light bg-info">
     <a class="navbar-brand text-white" href="/">YelpCamp</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,12 +17,12 @@
 </nav>
 
 <!-- hero -->
-<header class="jumbotron jumbotron-fluid bg-primary">
+<header class="jumbotron jumbotron-fluid bg-info">
     <div class="container">
         <h1 class="display-4">Welcome to YelpCamp</h1>
         <hr class="my-4">
-        <p class="lead">View our hand-picked campgrounds from all over the world!</p>
-        <a class='btn btn-light text-primary' href="/new" role="button">Add new camp</a>
+        <p class="lead font-weight-lighter">View our hand-picked campgrounds from all over the world!</p>
+        <a class='btn btn-light text-info' href="/new" role="button">Add new camp</a>
     </div>
 </header>
 
@@ -30,11 +30,11 @@
 <section class="container-fluid">
     <div class="row justify-content-center no-gutters">
         <% campgrounds.map((campground) => { %>
-            <div class="col-11 col-sm-8 col-md-5 col-lg-3 card border-light bg-light text-dark text-center m-2 ">  
+            <div class="col-11 col-sm-8 col-md-5 col-lg-3 card bg-secondary text-white text-center m-2 ">  
                 <img src=<%= campground.image %> class="img-fluid card-img-top"/>
                 <div class="card-body">
-                    <h4 class="mb-3"><%= campground.name %></h5>
-                    <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>"">More info</a>
+                    <h4 class="mb-3 font-weight-light"><%= campground.name %></h5>
+                    <a class="btn btn-info" href="/campgrounds/<%= campground._id %>"">More info</a>
                 </div>
                 
             </div>

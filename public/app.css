@@ -14,6 +14,10 @@ body {
     object-fit: cover;
 }
 
+.comments hr {
+    background-color: #606060;
+}
+
 @media (min-width: 576px) {
     .card-img-top {
     width: 100%;
