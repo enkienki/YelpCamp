@@ -1,0 +1,29 @@
+<% include layout/header %>
+
+<div class="container mt-5">
+    <div class="row">
+        <h1 class="font-weight-lighter text-info">Sign Up</h1>
+    </div>
+</div>
+
+<div class="container">
+    <form class="form-group" action="/register" method="POST">
+        <div class="col-md-6 col-11 m-2">
+            <label for="username">Username:</label>
+            <input class="form-control" type="text" name="username" placeholder="username">
+        </div>
+        <div class="col-md-6 col-11 m-2">
+            <label for="password">Password:</label>
+
+            <input class="form-control" type="password" name="password" placeholder="password">
+
+        </div>
+        <div class="col m-2 mt-4">
+            <button class="btn btn-outline-info">Sign up</button>
+        </div>
+
+    </form>
+</div>
+
+
+<% include layout/footer %>

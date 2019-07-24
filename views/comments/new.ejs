@@ -1,0 +1,42 @@
+<% include ../layout/header %>
+
+<!-- hero -->
+<div class="jumbotron jumbotron-fluid bg-info">
+    <div class="container">
+        <h1 class="display-4">Add your comment to <%= campground.name %></h1>
+    </div>
+
+</div>
+<!-- form -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8 align-self-center">
+            <form action="/campgrounds/<%= campground.id %>/comments" method="POST">
+                <div class="form-group">
+                    <div class="col-lg-10 col-12 m-2 ">
+                        <label for="newAuthor">Name</label>
+                        <input class="form-control" type="text" name="newAuthor" placeholder="enter your name">
+                    </div>
+                    <div class="col-12 m-2 mt-4">
+                        <label for="newText">Description</label>
+                        <textarea class="form-control" type="text" name="newText"
+                            placeholder="Add your comment here"></textarea>
+                    </div>
+                    <div class="col ml-2 mt-5">
+                        <a href="/campgrounds/<%= campground.id %>" class="btn btn-outline-light">Back</a>
+                        <button type="submit" class="btn btn-outline-info">Add your comment</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 col-sm-5 col-8 mt-4 align-self-top">
+            <img class="img-fluid rounded-lg"
+                src="<%= campground.image %>"
+                alt="">
+        </div>
+    </div>
+
+</div>
+
+
+<% include ../layout/footer %>

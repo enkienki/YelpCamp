@@ -1,0 +1,67 @@
+<% include ../layout/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        
+        </div>
+        <div class="col-md-9">
+            <div class="container mt-5">
+                <h3 class="display-4 font-weight-lighter text-info"><%= campground.name %></h3>
+            </div>
+        
+            <div class="container mt-5">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <img src=<%= campground.image %> class="img-fluid rounded-lg" />
+                    </div>
+                </div>
+            </div>
+        
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="font-weight-light"><%= campground.description %></p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- COMMENTS -->
+            <div class="container comments bg-secondary rounded-lg">
+                <div class="row">
+                    <div class="col-12 mt-4 mb-4 ">
+                        <h5 class="text-info">Comments (<%= campground.comments.length %>)</h5>
+                    </div>
+                    <div class="col-lg-9 col-sm-10 col-12 mb-4">
+                        <% campground.comments.map((comment) => { %>
+                            <p class="ml-md-5"><%= comment.text %> - 
+                                <span class="font-weight-lighter font-italic"><%= comment.author %></span>  -
+                                <% const days = Math.round((comment.created - currentDay)/86400000) %>
+                                <% if(days < 2) { %>
+                                    <span>Just added!</span>
+                                    <% } else { %>
+                                    <span><%= days %> days ago</span>
+                                    <% } %>
+                            </p>      
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- NAV BUTTON -->
+            <div class="container text-right mt-4">
+                <div class="row">
+                    <div class="col">
+                        <a href="/campgrounds" class="btn btn-outline-light">Back</a>
+                        <a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-outline-info ml-2">Add comment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<% include ../layout/footer %>

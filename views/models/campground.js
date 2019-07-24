@@ -16,4 +16,3 @@ var Campground = mongoose.model('campground', campgroundSchema)
 
 export default Campground
 
-
