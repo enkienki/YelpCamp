@@ -1,8 +1,11 @@
 import express from 'express'
 const router = express.Router({ mergeParams: true })
 
+import { isLoggedIn, checkCommentOwnership } from '../middleware/index'
+
 import Campground from '../views/models/campground'
 import Comment from '../views/models/comment'
+
 
 //================================
 // COMMENTS ROUTES
@@ -19,25 +22,43 @@ router.post('/', isLoggedIn, (req, res) => {
     Campground.findById(req.params.id, (err, campground) => {
         err ? console.log(err)
             :
-            Comment.create({
-                text: req.body.newText,
-                author: req.body.newAuthor,
-            }, (err, comment) => {
+            Comment.create(req.body.comment, (err, comment) => {
                 err ? console.log(err)
-                    :
-                    campground.comments.push(comment)
+                :
+                //add username to comment
+                comment.author.id = req.user._id
+                comment.author.username = req.user.username
+                //save comment
+                comment.save()
+                campground.comments.push(comment)
                 campground.save()
                 res.redirect('/campgrounds/' + campground._id)
             })
     })
 })
 
-//middleware - check if user is loggedin before access to secret page
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
+//EDIT
+router.get('/:comment_id/edit', checkCommentOwnership, (req, res) => {
+    Comment.findById(req.params.comment_id, (err, foundComment) => {
+        res.render('./comments/edit', { campground_id: req.params.id ,comment: foundComment })
+    })
+})
+
+//UPDATE
+router.put('/:comment_id', checkCommentOwnership, (req, res) => {
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment) => {
+        err ? res.redirect('back')
+        :
+        res.redirect('/campgrounds/' + req.params.id)
+    })
+})
+
+//DELETE
+router.delete('/:comment_id', checkCommentOwnership,  (req, res) => {
+    Comment.findByIdAndRemove(req.params.comment_id, (err) => {
+        res.redirect('back')
+    })
+})
+
 
 export default router

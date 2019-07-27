@@ -14,6 +14,7 @@
                 <div class="row text-center">
                     <div class="col-12">
                         <img src=<%= campground.image %> class="img-fluid rounded-lg" />
+                        <span class="font-weight-light font-italic">Campground added by <%= campground.author.username %></span>
                     </div>
                 </div>
             </div>
@@ -21,6 +22,7 @@
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-12">
+                        
                         <p class="font-weight-light"><%= campground.description %></p>
                     </div>
                 </div>
@@ -34,15 +36,36 @@
                     </div>
                     <div class="col-lg-9 col-sm-10 col-12 mb-4">
                         <% campground.comments.map((comment) => { %>
-                            <p class="ml-md-5"><%= comment.text %> - 
-                                <span class="font-weight-lighter font-italic"><%= comment.author %></span>  -
+                            <div class="ml-md-5 mt-2"><%= comment.text %> - 
+                                <span class="font-weight-lighter font-italic"><%= comment.author.username %></span>  -
                                 <% const days = Math.round((comment.created - currentDay)/86400000) %>
                                 <% if(days < 2) { %>
-                                    <span>Just added!</span>
+                                        <span>Just added!</span>
                                     <% } else { %>
-                                    <span><%= days %> days ago</span>
+                                        <span><%= days %> days ago</span>
                                     <% } %>
-                            </p>      
+
+                                <!-- EDIT and DELETE button -->
+                                <% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
+                                    <span>
+                                        <a 
+                                            class="ml-2"
+                                            style="color: inherit; text-decoration: none;"
+                                            href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
+                                            <i class="far fa-edit"></i>
+                                        </a>
+                                      
+                                        <form 
+                                            class="d-inline ml-2" 
+                                            action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" 
+                                            method="POST">
+                                            <button style="padding: 0; border: none; outline: none; font: inherit; color: inherit; background: none;"><i class="far fa-times-circle"></i></button>
+                                        </form>
+                                        
+                                    </span>
+                               <% } %>
+                                
+                            </div>      
                         <% }) %>
                     </div>
                 </div>
@@ -51,9 +74,21 @@
             <!-- NAV BUTTON -->
             <div class="container text-right mt-4">
                 <div class="row">
-                    <div class="col">
-                        <a href="/campgrounds" class="btn btn-outline-light">Back</a>
-                        <a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-outline-info ml-2">Add comment</a>
+                    <!-- back button -->
+                    <a href="/campgrounds/" class="btn btn-outline-light">Back</a>
+                    <!-- display edit and delete button if the current user is logged in -->
+                    <% if (currentUser && campground.author.id.equals(currentUser._id)) { %>
+                        <form action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-outline-danger ml-2">Delete</button>
+                        </form>
+                        <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-outline-warning ml-2">Edit</a>
+                    <% } %>  
+                    <!-- Add comment button -->
+                        <a 
+                            href="/campgrounds/<%= campground._id %>/comments/new" 
+                            class="btn btn-outline-info ml-2">
+                            Add comment
+                        </a>
                     </div>
                 </div>
             </div>

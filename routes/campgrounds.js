@@ -1,7 +1,11 @@
 import express from 'express'
 const router = express.Router()
 
+import { isLoggedIn, checkCampOwnership } from '../middleware/index'
+
 import Campground from '../views/models/campground'
+import Comment from '../views/models/comment'
+
 
 // INDEX - show all campgrounds
 router.get('/', (req, res) => {
@@ -19,14 +23,20 @@ router.get('/', (req, res) => {
 router.get('/new', isLoggedIn, (req, res) => res.render('./campgrounds/new'))
 
 // CREATE - add new campground to the DB coming from the form
-router.post('/campgrounds', (req, res) => {
+router.post('/', (req, res) => {
+    const author = {
+        id: req.user._id,
+        username: req.user.username
+    }
     Campground.create({
         name: req.body.newCampName,
         image: req.body.newCampImage,
         description: req.body.newCampDescription,
-    },
-        (err, camp) => { err ? console.log(err) : console.log(camp) })
-    res.redirect('./campgrounds')
+        author: author
+    },(err, campground) => { 
+        err && console.log(err) 
+        })
+    res.redirect('/campgrounds')
 })
 
 // SHOW - show infos about one campground
@@ -40,15 +50,36 @@ router.get('/:id', (req, res) => {
     })
 })
 
-//middleware - check if user is loggedin before access to secret page
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-}
+//EDIT - show form to update a campground
+router.get('/:id/edit', checkCampOwnership, (req, res) => {
+    Campground.findById(req.params.id, (err, foundCampground) => {
+        res.render('./campgrounds/edit', { campground: foundCampground })
+    })
+})
 
-//current DATE
+//UPDATE - update a campground
+router.put('/:id', checkCampOwnership, (req, res) => {
+    Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, editedCamp) => {
+        err ? console.log(err) 
+        :
+        console.log(req.body.campground);
+        res.redirect('/campgrounds/' + req.params.id)
+    })
+})
+
+//DELETE - delete a campground
+router.delete('/:id',checkCampOwnership , (req, res) => {
+    Campground.findByIdAndRemove(req.params.id, (err, removedCamp) => {
+        err ? console.log(err)
+        :
+        Comment.deleteMany({_id: {$in: removedCamp.comments}}, (err) => {
+            err && console.log(err);  
+        })
+    })
+    res.redirect('/campgrounds')
+})
+
+//current DATE - used to display comments
 const currentDay = Date.now()
 
 export default router

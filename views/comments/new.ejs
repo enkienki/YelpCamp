@@ -13,13 +13,9 @@
         <div class="col-12 col-lg-8 align-self-center">
             <form action="/campgrounds/<%= campground.id %>/comments" method="POST">
                 <div class="form-group">
-                    <div class="col-lg-10 col-12 m-2 ">
-                        <label for="newAuthor">Name</label>
-                        <input class="form-control" type="text" name="newAuthor" placeholder="enter your name">
-                    </div>
                     <div class="col-12 m-2 mt-4">
-                        <label for="newText">Description</label>
-                        <textarea class="form-control" type="text" name="newText"
+                        <label for="comment[text]">Description</label>
+                        <textarea class="form-control" type="text" name="comment[text]"
                             placeholder="Add your comment here"></textarea>
                     </div>
                     <div class="col ml-2 mt-5">
