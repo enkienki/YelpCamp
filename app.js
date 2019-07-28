@@ -10,6 +10,8 @@ port = 3000
 
 import methodOverride from 'method-override'
 
+import flash from 'connect-flash'
+
 import passport from 'passport'
 import localStrategy from 'passport-local'
 import passportLocalMongoose from 'passport-local-mongoose'
@@ -49,9 +51,13 @@ passport.deserializeUser(user.deserializeUser())
 
 app.use(methodOverride('_method'))
 
+app.use(flash())
+
 // save the username of user in currentUser to display targeted content and add it as a middleware in every routes
 app.use((req, res, next) =>{
     res.locals.currentUser = req.user
+    res.locals.error = req.flash("error")
+    res.locals.success = req.flash("success")
     next()
 })
 
@@ -61,8 +67,6 @@ app.use('/campgrounds', campgroundRoutes)
 
 //================================
 //MODELS
-import Campground from './views/models/campground'
-import Comment from './views/models/comment'
 import user from './views/models/user';
 
 //================================

@@ -3,6 +3,17 @@ const router = express.Router()
 
 import { isLoggedIn, checkCampOwnership } from '../middleware/index'
 
+var NodeGeocoder = require('node-geocoder');
+
+var options = {
+    provider: 'google',
+    httpAdapter: 'https',
+    apiKey: process.env.GEOCODER_API_KEY,
+    formatter: null
+};
+
+var geocoder = NodeGeocoder(options);
+
 import Campground from '../views/models/campground'
 import Comment from '../views/models/comment'
 
@@ -20,7 +31,8 @@ router.get('/', (req, res) => {
 })
 
 // NEW - show form to create new campground
-router.get('/new', isLoggedIn, (req, res) => res.render('./campgrounds/new'))
+router.get('/new', isLoggedIn, (req, res) => {
+    res.render('./campgrounds/new')})
 
 // CREATE - add new campground to the DB coming from the form
 router.post('/', (req, res) => {
@@ -31,6 +43,7 @@ router.post('/', (req, res) => {
     Campground.create({
         name: req.body.newCampName,
         image: req.body.newCampImage,
+        price: req.body.newCampPrice,
         description: req.body.newCampDescription,
         author: author
     },(err, campground) => { 
@@ -42,10 +55,12 @@ router.post('/', (req, res) => {
 // SHOW - show infos about one campground
 router.get('/:id', (req, res) => {
     Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
-        if (err) {
+        if (err || !foundCampground) {
             console.log(err)
+            req.flash('error', 'Campground not found')
+            res.redirect('back')
         } else {
-            res.render('./campgrounds/show', { campground: foundCampground, currentDay: currentDay })
+            res.render('./campgrounds/show', { campground: foundCampground, currentDay: currentDay})
         }
     })
 })
@@ -72,6 +87,7 @@ router.delete('/:id',checkCampOwnership , (req, res) => {
     Campground.findByIdAndRemove(req.params.id, (err, removedCamp) => {
         err ? console.log(err)
         :
+        req.flash('success', 'Campground deleted')
         Comment.deleteMany({_id: {$in: removedCamp.comments}}, (err) => {
             err && console.log(err);  
         })

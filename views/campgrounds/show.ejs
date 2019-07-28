@@ -2,9 +2,6 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-        
-        </div>
         <div class="col-md-9">
             <div class="container mt-5">
                 <h3 class="display-4 font-weight-lighter text-info"><%= campground.name %></h3>
@@ -19,10 +16,17 @@
                 </div>
             </div>
         
-            <div class="container mt-5">
+            <div class="container mt-sm-4 mt-3">
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-5 text-center">
+                        <p class="border border-info rounded-lg p-sm-2 p-1"><%= campground.price %>$ / night</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-sm-4 mt-3">
                 <div class="row">
                     <div class="col-12">
-                        
                         <p class="font-weight-light"><%= campground.description %></p>
                     </div>
                 </div>
@@ -86,7 +90,7 @@
                     <!-- Add comment button -->
                         <a 
                             href="/campgrounds/<%= campground._id %>/comments/new" 
-                            class="btn btn-outline-info ml-2">
+                            class="btn btn-outline-info ml-sm-2 ml-0 mt-sm-0 mt-2">
                             Add comment
                         </a>
                     </div>
@@ -95,8 +99,5 @@
         </div>
     </div>
 </div>
-
-
-
 
 <% include ../layout/footer %>

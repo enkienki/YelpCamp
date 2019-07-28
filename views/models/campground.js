@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 var campgroundSchema = new mongoose.Schema({
     name: String,
     image: String,
+    price: Number,
     description: String,
     comments: [
         {

@@ -21,11 +21,13 @@
                         <label for="newCampImage">Picture</label>
                         <input class="form-control" type="text" name="campground[image]" value="<%= campground.image %>">
                     </div>
+                    <div class="col-lg-2 col-5 m-2 mt-4">
+                        <label for="campground[price]">Price / night</label>
+                        <input class="form-control" type="number" name="campground[price]" placeholder="0.00" step="0.10">
+                    </div>
                     <div class="col-12 m-2 mt-4">
                         <label for="newCampDescription">Description</label>
-                        <textarea class="form-control" type="text" name="campground[description]">
-                            <%= campground.description %>
-                        </textarea>    
+                        <textarea class="form-control" type="text" rows="10" name="campground[description]"><%= campground.description %></textarea>    
                     </div>
                     <div class="col ml-2 mt-5">
                         <a href="/campgrounds/<%= campground.id %>" class="btn btn-outline-light">Back</a>

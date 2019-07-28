@@ -9,6 +9,7 @@ import Comment from '../views/models/comment'
 
 //================================
 // COMMENTS ROUTES
+
 //NEW - show form 
 router.get('/new', isLoggedIn, (req, res) => {
     Campground.findById(req.params.id, (err, foundCampground) => {
@@ -32,33 +33,41 @@ router.post('/', isLoggedIn, (req, res) => {
                 comment.save()
                 campground.comments.push(comment)
                 campground.save()
+                req.flash('success', 'Comment added')
                 res.redirect('/campgrounds/' + campground._id)
             })
     })
 })
 
-//EDIT
+//EDIT - show form
 router.get('/:comment_id/edit', checkCommentOwnership, (req, res) => {
-    Comment.findById(req.params.comment_id, (err, foundComment) => {
-        res.render('./comments/edit', { campground_id: req.params.id ,comment: foundComment })
+    Campground.findById(req.params.id, (err, foundCampground) => {
+        if (err || !foundCampground) {
+            req.flash('error', 'Campground not found')
+            return res.redirect('back')
+        }
+        Comment.findById(req.params.comment_id, (err, foundComment) => {
+            res.render('./comments/edit', { campground_id: req.params.id ,comment: foundComment })
+        })
     })
 })
 
-//UPDATE
+//UPDATE - edit comment
 router.put('/:comment_id', checkCommentOwnership, (req, res) => {
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment) => {
         err ? res.redirect('back')
         :
+        req.flash('success', 'Comment updated')
         res.redirect('/campgrounds/' + req.params.id)
     })
 })
 
 //DELETE
-router.delete('/:comment_id', checkCommentOwnership,  (req, res) => {
+router.delete('/:comment_id', checkCommentOwnership, (req, res) => {
     Comment.findByIdAndRemove(req.params.comment_id, (err) => {
+        req.flash('success', 'Comment deleted')
         res.redirect('back')
     })
 })
-
 
 export default router
