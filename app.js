@@ -4,7 +4,7 @@ require('dotenv').config()
 import bodyParser from'body-parser'
 // Mongoose
 import mongoose from 'mongoose'
-const dbRoute = 'mongodb+srv://enkienki:Rmn2010%2a@cluster0-wluuq.mongodb.net/yelpCamp?retryWrites=true&w=majority'
+const dbRoute = `mongodb+srv://enkienki:${process.env.MONGODB_PASS}@cluster0-wluuq.mongodb.net/yelpCamp?retryWrites=true&w=majority`
 // Express
 import express from 'express'
 const app = express(),
