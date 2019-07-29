@@ -3,17 +3,6 @@ const router = express.Router()
 
 import { isLoggedIn, checkCampOwnership } from '../middleware/index'
 
-var NodeGeocoder = require('node-geocoder');
-
-var options = {
-    provider: 'google',
-    httpAdapter: 'https',
-    apiKey: process.env.GEOCODER_API_KEY,
-    formatter: null
-};
-
-var geocoder = NodeGeocoder(options);
-
 import Campground from '../views/models/campground'
 import Comment from '../views/models/comment'
 
@@ -26,7 +15,7 @@ router.get('/', (req, res) => {
             console.log(err)
             :
             //display campgrounds from DB
-            res.render('./campgrounds/index', { campgrounds: campgrounds })
+            res.render('./campgrounds/index', { campgrounds: campgrounds})
     })
 })
 
@@ -42,6 +31,7 @@ router.post('/', (req, res) => {
     }
     Campground.create({
         name: req.body.newCampName,
+        location: req.body.newCampLocation,
         image: req.body.newCampImage,
         price: req.body.newCampPrice,
         description: req.body.newCampDescription,
@@ -60,7 +50,7 @@ router.get('/:id', (req, res) => {
             req.flash('error', 'Campground not found')
             res.redirect('back')
         } else {
-            res.render('./campgrounds/show', { campground: foundCampground, currentDay: currentDay})
+            res.render('./campgrounds/show', { campground: foundCampground, currentDay: currentDay, GOOGLE_MAPS_API: process.env.GOOGLE_MAPS_API })
         }
     })
 })

@@ -2,10 +2,18 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
-            <div class="container mt-5">
+        <div class="container mt-5">
                 <h3 class="display-4 font-weight-lighter text-info"><%= campground.name %></h3>
             </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="container mt-5">
+                <img class="img-fluid rounded-lg" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= campground.location %>&zoom=12&size=400x400&maptype=hybrid&markers=color:red%7C<%= campground.location %>&key=<%= GOOGLE_MAPS_API %>" />
+            </div>
+        </div>
+        <div class="col-md-8">
+            
         
             <div class="container mt-5">
                 <div class="row text-center">
@@ -18,7 +26,7 @@
         
             <div class="container mt-sm-4 mt-3">
                 <div class="row">
-                    <div class="col-lg-2 col-md-4 col-sm-4 col-5 text-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-5 text-center">
                         <p class="border border-info rounded-lg p-sm-2 p-1"><%= campground.price %>$ / night</p>
                     </div>
                 </div>

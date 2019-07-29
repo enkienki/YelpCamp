@@ -1,3 +1,5 @@
+//DOTENV
+require('dotenv').config()
 // Node.js body parsing middleware
 import bodyParser from'body-parser'
 // Mongoose
