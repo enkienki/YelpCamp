@@ -8,7 +8,7 @@ const dbRoute = 'mongodb+srv://enkienki:Rmn2010%2a@cluster0-wluuq.mongodb.net/ye
 // Express
 import express from 'express'
 const app = express(),
-port = 3000
+port = process.env.PORT
 
 import methodOverride from 'method-override'
 
