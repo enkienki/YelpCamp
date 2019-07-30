@@ -1,37 +1,38 @@
 <% include ../layout/header %>
 
 <div class="container">
+<!-- CAMP NAME -->
     <div class="row">
         <div class="container mt-5">
                 <h3 class="display-4 font-weight-lighter text-info"><%= campground.name %></h3>
             </div>
     </div>
-    <div class="row">
-        <div class="col-md-4">
+<!-- MAP -->
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-9 col-12">
             <div class="container mt-5">
-                <img class="img-fluid rounded-lg" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= campground.location %>&zoom=12&size=400x400&maptype=hybrid&markers=color:red%7C<%= campground.location %>&key=<%= GOOGLE_MAPS_API %>" />
+                <img class="img-fluid rounded-lg" src="https://maps.googleapis.com/maps/api/staticmap?center=<%= campground.location %>&zoom=12&size=400x600&maptype=hybrid&markers=color:red%7C<%= campground.location %>&key=<%= GOOGLE_MAPS_API %>" />
             </div>
         </div>
-        <div class="col-md-8">
-            
-        
+<!-- PICTURE -->
+        <div class="col-lg-8">     
             <div class="container mt-5">
-                <div class="row text-center">
-                    <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 col-md-10 col-sm-10 col-11">
                         <img src=<%= campground.image %> class="img-fluid rounded-lg" />
                         <span class="font-weight-light font-italic">Campground added by <%= campground.author.username %></span>
                     </div>
                 </div>
             </div>
-        
+<!-- PRICE -->
             <div class="container mt-sm-4 mt-3">
                 <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-5 text-center">
-                        <p class="border border-info rounded-lg p-sm-2 p-1"><%= campground.price %>$ / night</p>
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-5 offset-lg-10 offset-sm-9 offset-7">
+                        <p class=""><%= campground.price %>$ / night</p>
                     </div>
                 </div>
             </div>
-
+<!-- DESCRIPTION -->
             <div class="container mt-sm-4 mt-3">
                 <div class="row">
                     <div class="col-12">
@@ -40,11 +41,17 @@
                 </div>
             </div>
         
-            <!-- COMMENTS -->
-            <div class="container comments bg-secondary rounded-lg">
+<!-- COMMENTS -->
+            <div class="container comments bg-info rounded-lg">
                 <div class="row">
                     <div class="col-12 mt-4 mb-4 ">
-                        <h5 class="text-info">Comments (<%= campground.comments.length %>)</h5>
+                        <h4 class="font-weight-lighter text-light">Comments (<%= campground.comments.length %>)
+                        <!-- Add comment button -->
+                        <a href="/campgrounds/<%= campground._id %>/comments/new" class="btn btn-outline-light btn-sm float-right">
+                            Add comment
+                        </a>
+                        </h4>
+                        
                     </div>
                     <div class="col-lg-9 col-sm-10 col-12 mb-4">
                         <% campground.comments.map((comment) => { %>
@@ -83,7 +90,7 @@
                 </div>
             </div>
         
-            <!-- NAV BUTTON -->
+<!-- NAV BUTTON -->
             <div class="container text-right mt-4">
                 <div class="row">
                     <!-- back button -->
@@ -95,12 +102,7 @@
                         </form>
                         <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-outline-warning ml-2">Edit</a>
                     <% } %>  
-                    <!-- Add comment button -->
-                        <a 
-                            href="/campgrounds/<%= campground._id %>/comments/new" 
-                            class="btn btn-outline-info ml-sm-2 ml-0 mt-sm-0 mt-2">
-                            Add comment
-                        </a>
+                    
                     </div>
                 </div>
             </div>

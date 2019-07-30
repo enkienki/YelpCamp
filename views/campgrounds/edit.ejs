@@ -9,13 +9,23 @@
 </div>
 <!-- form -->
 <div class="container">
+    
     <div class="row justify-content-center">
+        <div class="col-md-4 col-sm-5 col-8 mt-4 align-self-top">
+            <img class="img-fluid rounded-lg"
+                src="<%= campground.image %>"
+                alt="">
+        </div>
         <div class="col-12 col-lg-8 align-self-center">
             <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
                 <div class="form-group">
                     <div class="col-lg-10 col-12 m-2 ">
                         <label for="newCampName">Campground</label>
                         <input class="form-control" type="text" name="campground[name]" value="<%= campground.name %>">
+                    </div>
+                    <div class="col-lg-10 col-12 m-2 mt-4">
+                        <label for="newCampLocation">Location</label>
+                        <input class="form-control" type="text" name="campground[location]" value="<%= campground.location %>">
                     </div>
                     <div class="col-lg-10 col-12 m-2 mt-4">
                         <label for="newCampImage">Picture</label>
@@ -36,11 +46,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-4 col-sm-5 col-8 mt-4 align-self-top">
-            <img class="img-fluid rounded-lg"
-                src="https://images.unsplash.com/photo-1517771778436-39f5763f5270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60"
-                alt="">
-        </div>
+        
     </div>
 
 </div>

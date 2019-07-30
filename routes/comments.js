@@ -47,7 +47,7 @@ router.get('/:comment_id/edit', checkCommentOwnership, (req, res) => {
             return res.redirect('back')
         }
         Comment.findById(req.params.comment_id, (err, foundComment) => {
-            res.render('./comments/edit', { campground_id: req.params.id ,comment: foundComment })
+            res.render('./comments/edit', { campground_id: req.params.id ,comment: foundComment, campground: foundCampground })
         })
     })
 })

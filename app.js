@@ -8,7 +8,7 @@ const dbRoute = `mongodb+srv://enkienki:${process.env.MONGODB_PASS}@cluster0-wlu
 // Express
 import express from 'express'
 const app = express(),
-port = process.env.PORT
+port = 3000
 
 import methodOverride from 'method-override'
 

@@ -14,11 +14,11 @@
 <section class="container-fluid">
     <div class="row justify-content-center no-gutters">
         <% campgrounds.map((campground) => { %>
-            <div class="col-11 col-sm-8 col-md-5 col-lg-3 card bg-secondary text-white text-center m-2 ">  
+            <div class="col-11 col-sm-8 col-md-5 col-lg-3 card bg-info text-light text-center m-2 ">  
                 <img src=<%= campground.image %> class="img-fluid card-img-top"/>
                 <div class="card-body">
                     <h4 class="mb-3 font-weight-light"><%= campground.name %></h5>
-                    <a class="btn btn-outline-info" href="/campgrounds/<%= campground._id %>"">More info</a>
+                    <a class="btn btn-outline-light" href="/campgrounds/<%= campground._id %>"">More info</a>
                 </div> 
             </div>
         <% }) %>
