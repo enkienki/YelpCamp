@@ -1,6 +1,11 @@
 # YelpCamp
 It is the final project of Colt Steele's web developer bootcamp, a campgound version of Yelp.
-Project's build using <b>EJS</b> for the front-end, <b>NODE, EXPRESS, MONGOOSE, MONGODB</b> fro the back-end
+Project's build using <b>EJS, BOOTSTRAP 4</b> for the front-end, <b>NODE, EXPRESS, MONGOOSE, MONGODB</b> fro the back-end
+<br/>
+<br/>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/enkienki/YelpCamp/master/Yelpcamp-Homepage.png" width="350" alt="accessibility text">
+</p>
 <br/>
 <br/>
 <b>SCENARIO</b>
