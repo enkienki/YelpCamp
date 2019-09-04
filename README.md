@@ -4,7 +4,7 @@ Project's build using <b>EJS, BOOTSTRAP 4</b> for the front-end, <b>NODE, EXPRES
 <br/>
 <br/>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/enkienki/YelpCamp/master/Yelpcamp-Homepage.png" width="350" alt="accessibility text">
+  <img src="https://raw.githubusercontent.com/enkienki/YelpCamp/master/Yelpcamp-Homepage.png" width="350" alt="">
 </p>
 <br/>
 <br/>
@@ -18,4 +18,4 @@ To add some campground, you first have to register, with a simple name and passw
 <i>You CANNOT perform edit and delete actions if you're not the owners of campgrounds or comments</i>
 <br/>
 <br/>
-[The app is deployed on Heroku and visible here](https://calm-hollows-75086.herokuapp.com/)
+<a href='https://calm-hollows-75086.herokuapp.com/'>The app is deployed on Heroku and visible here</a>
