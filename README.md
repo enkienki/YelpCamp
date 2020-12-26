@@ -1,6 +1,9 @@
 # YelpCamp
+<br/>
+<a href='https://calm-hollows-75086.herokuapp.com/'>The app is deployed on Heroku and visible here</a>
+<br/>
 It is the final project of Colt Steele's web developer bootcamp, a campgound version of Yelp.
-Project's build using <b>EJS, BOOTSTRAP 4</b> for the front-end, <b>NODE, EXPRESS, MONGOOSE, MONGODB</b> fro the back-end
+Techs used: <b>EJS, BOOTSTRAP 4</b> for the front-end, <b>NODE, EXPRESS, MONGOOSE, MONGODB</b> fro the back-end
 <br/>
 <br/>
 <p align="center">
@@ -18,4 +21,4 @@ To add some campground, you first have to register, with a simple name and passw
 <i>You CANNOT perform edit and delete actions if you're not the owners of campgrounds or comments</i>
 <br/>
 <br/>
-<a href='https://calm-hollows-75086.herokuapp.com/'>The app is deployed on Heroku and visible here</a>
+
