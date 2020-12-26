@@ -2,6 +2,7 @@
 <br/>
 <a href='https://calm-hollows-75086.herokuapp.com/'>The app is deployed on Heroku and visible here</a>
 <br/>
+<br/>
 It is the final project of Colt Steele's web developer bootcamp, a campgound version of Yelp.
 Techs used: <b>EJS, BOOTSTRAP 4</b> for the front-end, <b>NODE, EXPRESS, MONGOOSE, MONGODB</b> fro the back-end
 <br/>
