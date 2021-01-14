@@ -1,6 +1,6 @@
 # YelpCamp
 <br/>
-<a href='https://calm-hollows-75086.herokuapp.com/'>The app is deployed on Heroku and visible here</a>
+<a href='https://calm-hollows-75086.herokuapp.com/'>The app is deployed on Heroku and visible here</a> (loading time is long due to my free plan on heroku...)
 <br/>
 <br/>
 It is the final project of Colt Steele's web developer bootcamp, a campgound version of Yelp.
